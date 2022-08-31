@@ -1,38 +1,168 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#sidebar {
+  width: 200px;
+  padding-bottom: 100%;
+  float: left;
+  background-color: white;
+  /* border: 6px dotted chartreuse; */
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#lists {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 700;
+  font-size: 16px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.side_list:hover {
+  background-color: #EEF3FE;
 }
-
-.App-link {
-  color: #61dafb;
+.side_list {
+  margin-bottom: 10px;
 }
+#login {
+  position: absolute;
+  bottom: 23px;
+}
+#container {
+  padding-top: 20px;
+  margin-left: 300px;
+  margin-right: 10%;
+  /* border: 6px dotted chartreuse; */
+}
+h1 {
+  font-weight: 500;
+  font-size: 36px;
+  margin-bottom: 2px;
+}
+#subh1 {
+  margin-left: 0px;
+  margin-top: 2px;
+  font-weight: 400;
+  font-size: 14px;
+}
+h2 {
+  font-weight: 500;
+  font-size: 24px;
+}
+h3 {
+  font-weight: 700;
+  font-size: 14px;
+  margin-left: 20px;
+}
+h4 {
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 23px;
+  /* border: 6px dotted chartreuse; */
+}
+h5 {
+  position: absolute;
+  /* width: 155px; */
+  height: 19px;
+  left: 50%;
+  margin-left: -75px;
+  top: 16px;
+  margin-top: 0px;
+  font-weight: 500;
+  font-size: 16px;
+}
+h6 {
+  margin: 8px 0px 8px 0px;
+}
+.task {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid #E8EFF6;
+  box-shadow: 2px 2px 2px #E6EDF7;
+  border-radius: 4px;
+}
+hr {
+  margin-top: 0;
+  height: 3.72px;
+  border-radius: 4px 4px 0px 0px;
+}
+p {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  margin-left: 45px;
+  margin-right: 20px;
+}
+input {
+  margin-right: 8px;
+}
+.closeAddTaskForm:hover {
+  background-color: lightgrey;
+}
+.closeAddListForm:hover {
+  background-color: lightgrey;
+}
+.trash:hover {
+  background-color: lightgrey;
+}
+/* .done {
+  display: none;
+}
+.show-done .done {
+  display: block;
+} */
+#addTaskForm {
+  width: 480px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -240px;
+  margin-top: -200px;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  background: #FFFFFF;
+  border: 1px solid #E3ECF3;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+#addListForm {
+  width: 480px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -240px;
+  margin-top: -200px;
+
+  background: #FFFFFF;
+  border: 1px solid #E3ECF3;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+.hr_form {
+  position: absolute;
+  height: 0px;
+  left: 24px;
+  right: 24px;
+  top: 51px;
+  border: 1px solid #E8EFF6;
+}
+form {
+  position: absolute;
+  width: 432px;
+  left: 24px;
+  top: 59px;
+  /* border: 6px dotted chartreuse; */
+}
+#task_name {
+  width: 424px;
+}
+.hide_form {
+  display: none;
+}
+.hide_list_form {
+  display: none;
+}
+button {
+  width:136px;
+  background: #5C86F2;
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 14px;
 }
