@@ -68,6 +68,10 @@ h5 {
 h6 {
   margin: 8px 0px 8px 0px;
 }
+svg {
+  padding-right: 8px;
+  padding-bottom: 0px;
+}
 .task {
   margin-bottom: 20px;
   box-sizing: border-box;
@@ -100,12 +104,12 @@ input {
 .trash:hover {
   background-color: lightgrey;
 }
-/* .done {
+.done {
   display: none;
 }
 .show-done .done {
   display: block;
-} */
+}
 #addTaskForm {
   width: 480px;
   height: 400px;

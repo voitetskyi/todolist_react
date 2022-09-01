@@ -1,4 +1,5 @@
 import './App.css';
+import AddTaskForm from './components/addTaskForm';
 
 import Sidebar from './components/sidebar';
 import Tasks_lists from './components/tasks_lists';
@@ -12,11 +13,14 @@ function App() {
   let tasks = [
     {id: 1, done: false, name: 'Task 1', description: 'Task description', duedate: '2022-09-22', list_id: 1},
     {id: 2, done: false, name: 'Task 2', description: 'Task description', duedate: '2022-09-22', list_id: 2},
-    {id: 3, done: false, name: 'Task 3', description: 'Task description', duedate: '2022-09-22', list_id: 3}
+    {id: 3, done: false, name: 'Task 3', description: 'Task description', duedate: '2022-09-22', list_id: 3},
+    {id: 4, done: false, name: 'Task 4', description: 'Task description undone', duedate: '2022-08-22', list_id: 1},
+    {id: 5, done: true, name: 'Task 5', description: 'Task description done', duedate: '2022-09-22', list_id: 1}
   ]
   return (
     <div id='todolist_app'>
-      <Sidebar/>
+      <Sidebar lists={lists}/>
+      <AddTaskForm/>
       <div id="container">
         <h1>Поточні завдання</h1>
         <Tasks_lists lists={lists} tasks={tasks}/>
