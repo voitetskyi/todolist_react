@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
 import AddListForm from './components/addListForm';
 import AddTaskForm from './components/addTaskForm';
 import UpdateTaskForm from './components/updateTaskForm';
 import Sidebar from './components/sidebar';
-import Tasks_lists from './components/tasksLists';
+import TodayTasksPage from './components/TodayTasksPage';
 
 const axios = require('axios');
 
@@ -52,12 +53,13 @@ function App() {
   }
 
   const selectFilter = (id) => {
-    const endpointTask = 'http://localhost:8080/api//list/' + id + '/tasks'
+    const endpointTask = 'http://localhost:8080/api/list/' + id + '/tasks'
     axios.get(endpointTask)
     .then(function (response) {
       setTasks(response.data[1])
       setTaskLists(response.data[0])
     })
+    
   }
 
   const selectAllTasks = () => {
@@ -118,10 +120,10 @@ function App() {
       <AddTaskForm lists={lists} addTask={addTask}/>
       <UpdateTaskForm lists={lists} task={task} changeTask={changeTask}/>
       <AddListForm addList={addList}/>
-      <div id="container">
-        <h1>Поточні завдання</h1>
-        <Tasks_lists lists={lists} tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} changeDone={changeDone} deleteList={deleteList}/>
-      </div>
+      <Routes>
+        <Route path='today' element={<TodayTasksPage tasks={tasks} lists={lists} deleteTask={deleteTask} updateTask={updateTask} changeDone={changeDone}/>}/>
+      </Routes>
+      
     </div>
   )
 }

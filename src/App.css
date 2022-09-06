@@ -33,11 +33,12 @@ h1 {
   font-size: 36px;
   margin-bottom: 2px;
 }
-#subh1 {
-  margin-left: 0px;
-  margin-top: 2px;
-  font-weight: 400;
-  font-size: 14px;
+.billet {
+  width: 150px;
+  background-color: #5C86F2;
+  text-align: center;
+  border-radius: 4px;
+  color: #FFFFFF;
 }
 h2 {
   font-weight: 500;

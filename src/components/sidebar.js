@@ -30,19 +30,18 @@ const Sidebar = (props) => {
 
     return (
         <div id='sidebar'>
-        <h2 style={{margin: 20}}>Мої списки завдань</h2>
-        <div id="lists">
-            <div className="side_list" id="side_list0" onClick={tasksWithoutList}>Завдання без списку</div>
-            <div className="side_list" id="side_list" onClick={allTasks}>Всі завдання</div>
-            {lists.filter(list => list !== undefined).map(l => <SideList key={l.id} lists={l} selectFilter={selectFilter}/>)}
+            <h2 style={{margin: 20}}>Мої списки завдань</h2>
+            <div id="lists">
+                <div className="side_list" id="side_list" onClick={allTasks}>Всі завдання</div>
+                {lists.filter(list => list !== undefined).map(l => <SideList key={l.id} lists={l} selectFilter={selectFilter}/>)}
+            </div>
+            <button style={{margin: 20}} onClick={closeAddTaskForm}>Додати завдання</button>
+            <button style={{margin: 20}} onClick={closeAddListForm}>Додати список</button>
+            <div style={{margin: 20}}>
+                <input type="checkbox" defaultChecked onChange={show_done_tasks}/>
+                <label>Приховувати виконані завдання</label>
+            </div>
         </div>
-        <button style={{margin: 20}} onClick={closeAddTaskForm}>Додати завдання</button>
-        <button style={{margin: 20}} onClick={closeAddListForm}>Додати список</button>
-        <div style={{margin: 20}}>
-            <input type="checkbox" defaultChecked onChange={show_done_tasks}/>
-            <label>Приховувати виконані завдання</label>
-        </div>
-    </div>
     )
 }
 

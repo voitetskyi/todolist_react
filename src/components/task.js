@@ -5,6 +5,7 @@ const Task = (props) => {
     const deleteTask = props.deleteTask
     const updateTask = props.updateTask
     const changeDone = props.changeDone
+    const lists = props.lists
 
     const deleteTaskHandler = () => deleteTask(id)
 
@@ -19,6 +20,11 @@ const Task = (props) => {
         let task = props.task
         task.done ? task.done = false : task.done = true
         changeDone(task)
+    }
+
+    let list_name
+    for (let item of lists) {
+        if (item.id === list_id) list_name = item.name
     }
 
     let today = new Date()
@@ -49,6 +55,7 @@ const Task = (props) => {
                 {duedate}</h4>
             <h3><input type="checkbox" defaultChecked={checked} onClick={changeDoneHandler}/>{name}</h3>
             <p>{description}</p>
+            <div className="billet">{list_name}</div>
         </div>
     )
 }
