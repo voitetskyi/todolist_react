@@ -15,14 +15,21 @@ class DashboardModel {
         return collection.rows
     }
 
-    async tasklist(id, all) {
-        if (all === 'true') {
-            const tasklist = await db.select('*').from('tasks').where('list_id', '=', id)
-            return tasklist
-        } else {
-            const tasklist = await db.select('*').from('tasks').where('list_id', '=', id).andWhere('done', '=', false)
-            return tasklist
-        }
+    // async tasklist(id, all) {
+    //     if (all === 'true') {
+    //         const tasklist = await db.select('*').from('tasks').where('list_id', '=', id)
+    //         return tasklist
+    //     } else {
+    //         const tasklist = await db.select('*').from('tasks').where('list_id', '=', id).andWhere('done', '=', false)
+    //         return tasklist
+    //     }
+    // }
+
+    async tasklist(id) {
+        let list = await db.select('*').from('lists').where('id', '=', id)
+        let tasks = await db.select('*').from('tasks').where('list_id', '=', id)
+        return [list, tasks]
+
     }
 }
 

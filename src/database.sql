@@ -9,8 +9,7 @@ create TABLE tasks(
     name VARCHAR,
     description VARCHAR,
     dueDate DATE,
-    list_id INTEGER,
-    FOREIGN KEY (list_id) REFERENCES lists (id)
+    list_id INTEGER
 );
 
  

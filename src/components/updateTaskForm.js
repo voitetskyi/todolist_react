@@ -62,7 +62,7 @@ const UpdateTaskForm = ({lists, task, changeTask}) => {
                 <h6>Встановіть дедлайн<input type="date" id="start" name="duedate" defaultValue={duedate} style={{marginLeft: 50}}/></h6>
                 <h6>Оберіть список завдань<select id="select" name="select" form="update_task_form" defaultValue={list_name} style={{marginLeft: 30}}>
                         <option>Завдання без списку</option>
-                        {lists.map(l => <option key={l.id}>{l.name}</option>)}
+                        {lists.filter(list => list !== undefined).map(l => <option key={l.id}>{l.name}</option>)}
                     </select>
                 </h6>
                 <button type="submit">Редагувати</button>

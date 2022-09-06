@@ -9,85 +9,95 @@ import Tasks_lists from './components/tasksLists';
 const axios = require('axios');
 
 function App() {
-  const allTasks = [
-    {id: 1, done: false, name: 'Task 1', description: 'Task description', duedate: '2022-09-22', list_id: 1},
-    {id: 2, done: false, name: 'Task 2', description: 'Task description', duedate: '2022-09-22', list_id: 2},
-    {id: 3, done: false, name: 'Task 3', description: 'Task description', duedate: '2022-09-22', list_id: 3},
-    {id: 4, done: false, name: 'Task 4', description: 'Task description undone', duedate: '2022-08-22', list_id: 1},
-    {id: 5, done: true, name: 'Task 5', description: 'Task description done', duedate: '2022-09-22', list_id: 1}
-  ]
-  const allLists = [
-    {id: 1, name: 'List 1'},
-    {id: 2, name: 'List 2'},
-    {id: 3, name: 'List 3'}
-  ]
+
   const [lists_for_tasks_lists, setTaskLists] = useState([])
-  //   [
-  //   {id: 1, name: 'List 1'},
-  //   {id: 2, name: 'List 2'},
-  //   {id: 3, name: 'List 3'}
-  // ])
   const [lists, setLists] = useState([])
-  //   [
-  //   {id: 1, name: 'List 1'},
-  //   {id: 2, name: 'List 2'},
-  //   {id: 3, name: 'List 3'}
-  // ])
   const [tasks, setTasks] = useState([])
-  //   [
-  //   {id: 1, done: false, name: 'Task 1', description: 'Task description', duedate: '2022-09-22', list_id: 1},
-  //   {id: 2, done: false, name: 'Task 2', description: 'Task description', duedate: '2022-09-22', list_id: 2},
-  //   {id: 3, done: false, name: 'Task 3', description: 'Task description', duedate: '2022-09-22', list_id: 3},
-  //   {id: 4, done: false, name: 'Task 4', description: 'Task description undone', duedate: '2022-08-22', list_id: 1},
-  //   {id: 5, done: true, name: 'Task 5', description: 'Task description done', duedate: '2022-09-22', list_id: 1},
-  //   {id: 6, done: false, name: 'Task 6', description: 'Task without list', duedate: '2022-09-22', list_id: 11}
-  // ])
   const [task, setTask] = useState()
-  const [list_filter, setListFilter] = useState()
     
   const addTask = (task) => {
     axios.post('http://localhost:8080/api/task', task)
     .then(function (response) {
-      // console.log(response)
       setTasks([...tasks, response.data[0]])
     })
   }
+
   const deleteTask = (id) => {
-    setTasks([...tasks.map(task => task.id === id ? undefined : task)])
+    const endpointTask = 'http://localhost:8080/api/task/' + id
+    axios.delete(endpointTask)
+    .then(function (response) {
+      console.log(response)
+      setTasks([...tasks.map(task => task.id === id ? undefined : task)])
+    })
   }
+
   const updateTask = (taskUpdate) => {
     setTask(taskUpdate)
   }
 
   const changeTask = (changed_task) => {
     const endpointTask = 'http://localhost:8080/api/task/' + changed_task.id
-    console.log(endpointTask)
     axios.put(endpointTask, changed_task)
     .then(function (response) {
-      console.log(response)
       setTasks([...tasks.map(task => task.id === changed_task.id ? changed_task : task)])
     })
   }
+
   const changeDone = (task) => {
-    setTasks([...tasks.map(t => t.id === task.id ? task : t)])
+    const endpointTask = 'http://localhost:8080/api/task/' + task.id
+    axios.patch(endpointTask, task)
+    .then(function (response) {
+      setTasks([...tasks.map(t => t.id === task.id ? task : t)])
+    })
   }
+
   const selectFilter = (id) => {
-    setTasks(allTasks.filter(t => t.list_id === id))
-    setTaskLists(allLists.filter(l => l.id === id))
+    const endpointTask = 'http://localhost:8080/api//list/' + id + '/tasks'
+    axios.get(endpointTask)
+    .then(function (response) {
+      setTasks(response.data[1])
+      setTaskLists(response.data[0])
+    })
   }
+
   const selectAllTasks = () => {
-    setTasks(allTasks)
-    setTaskLists(allLists)
+    axios.get('http://localhost:8080/api/tasks')
+    .then(function (response) {
+      setTasks(response.data)
+    })
+    axios.get('http://localhost:8080/api/lists')
+      .then(function (response) {
+        setTaskLists(response.data)
+    })
   }
+
   const tasksWithoutList = () => {
     //setTasks()
     setTaskLists([{id: 0, name: 'Завдання без списку'}])
   }
 
-  
+  const addList = (list) => {
+    axios.post('http://localhost:8080/api/list', list)
+    .then(function (response) {
+      setLists([...lists, response.data[0]])
+      console.log(list)
+      console.log(response.data[0])
+    })
+  }
+
+  const deleteList = (id) => {
+    console.log(id)
+    const endpointTask = 'http://localhost:8080/api/list/' + id
+    axios.delete(endpointTask)
+    .then(function (response) {
+      setLists([...lists.map(list => list.id === id ? undefined : list)])
+    })
+  }
+
   useEffect(() => {
     fetchTasks()
   }, [])
+
   useEffect(() => {
     fetchLists()
   }, [])
@@ -105,12 +115,12 @@ function App() {
   return (
     <div id='todolist_app'>
       <Sidebar lists={lists} selectFilter={selectFilter} allTasks={selectAllTasks} tasksWithoutList={tasksWithoutList}/>
-      <AddTaskForm lists={lists} tasks={tasks} addTask={addTask}/>
+      <AddTaskForm lists={lists} addTask={addTask}/>
       <UpdateTaskForm lists={lists} task={task} changeTask={changeTask}/>
-      <AddListForm/>
+      <AddListForm addList={addList}/>
       <div id="container">
         <h1>Поточні завдання</h1>
-        <Tasks_lists lists={lists_for_tasks_lists} tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} changeDone={changeDone}/>
+        <Tasks_lists lists={lists} tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} changeDone={changeDone} deleteList={deleteList}/>
       </div>
     </div>
   )

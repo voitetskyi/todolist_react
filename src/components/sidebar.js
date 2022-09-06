@@ -34,7 +34,7 @@ const Sidebar = (props) => {
         <div id="lists">
             <div className="side_list" id="side_list0" onClick={tasksWithoutList}>Завдання без списку</div>
             <div className="side_list" id="side_list" onClick={allTasks}>Всі завдання</div>
-            {lists.map(l => <SideList key={l.id} lists={l} selectFilter={selectFilter}/>)}
+            {lists.filter(list => list !== undefined).map(l => <SideList key={l.id} lists={l} selectFilter={selectFilter}/>)}
         </div>
         <button style={{margin: 20}} onClick={closeAddTaskForm}>Додати завдання</button>
         <button style={{margin: 20}} onClick={closeAddListForm}>Додати список</button>

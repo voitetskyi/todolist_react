@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-const AddTaskForm = ({lists, tasks, addTask}) => {
+const AddTaskForm = ({lists, addTask}) => {
 
     const closeAddTaskForm = () => {
         const addTaskFormElement = document.getElementById('addTaskForm')
@@ -15,24 +15,18 @@ const AddTaskForm = ({lists, tasks, addTask}) => {
         const obj = Object.fromEntries(formData.entries())
         // console.log(obj)
         let list_id = undefined
-        for (const [key, value] of Object.entries(lists)) {
+        for (const [key, value] of Object.entries(lists).filter(list => list !== undefined)) {
             if (value.name === obj.select) list_id = value.id
         }
-        let id = ++tasks.length
-        // console.log(list_id)
         const task = {
             done: false,
             name: obj.taskname,
             description: obj.textarea,
             duedate: (obj.duedate !== '' ? obj.duedate : undefined),
-            list_id: list_id,
-            id: id
+            list_id: list_id
         }
-        // console.log(lists, tasks, onChange)
         addTask(task)
-        // console.log(tasks)
         closeAddTaskForm()
-        return task
     }
     return (
         <div className="hide_form" id="addTaskForm" name="addTaskForm">
@@ -47,7 +41,7 @@ const AddTaskForm = ({lists, tasks, addTask}) => {
                 <h6>Встановіть дедлайн<input type="date" id="start" name="duedate" style={{marginLeft: 50}}/></h6>
                 <h6>Оберіть список завдань<select id="select" name="select" form="add_task_form" style={{marginLeft: 30}}>
                         <option>Завдання без списку</option>
-                        {lists.map(l => <option key={l.id}>{l.name}</option>)}
+                        {lists.filter(list => list !== undefined).map(l => <option key={l.id}>{l.name}</option>)}
                     </select>
                 </h6>
                 <button type="submit">Додати завдання</button>
