@@ -15,14 +15,14 @@ const UpdateTaskForm = ({lists, task, changeTask}) => {
         name = task.name
         description = task.description
         duedate = task.duedate
+        // duedate = new Date(task.duedate)
+        console.log(duedate, typeof duedate)
         id = task.id
     }
 
     const closeUpdateTaskForm = () => {
         const updateTaskFormElement = document.getElementById('updateTaskForm')
-        const updateTaskForm = document.forms['updateTask']
         updateTaskFormElement.classList.toggle("hide_form")
-        updateTaskForm.reset()
     }
     const onSubmitHandler = (event) => {
         event.preventDefault()

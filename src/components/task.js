@@ -9,9 +9,10 @@ const Task = (props) => {
     const deleteTaskHandler = () => deleteTask(id)
 
     const updateTaskHandler = () => {
+        updateTask(props.task)
         const updateTaskFormElement = document.getElementById('updateTaskForm')
         updateTaskFormElement.classList.toggle("hide_form")
-        updateTask(props.task)
+
     }
 
     const changeDoneHandler = ()=> {
