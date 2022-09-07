@@ -7,9 +7,8 @@ import UpdateTaskForm from './components/updateTaskForm';
 import Sidebar from './components/sidebar';
 import TodayTasksPage from './components/TodayTasksPage';
 import TodoListPage from './components/TodoListPage';
+import axios from './Axios'
 
-const axios = require('axios');
-const axi = require('./Axios.js')
 
 function App() {
 
@@ -18,12 +17,12 @@ function App() {
   const [task, setTask] = useState()
     
   async function addTask(task) {
-    let response = await axi.addTask(task)
+    let response = await axios.addTask(task)
     setTasks([...tasks, response])
   }
 
   async function deleteTask(id) {
-    await axi.deleteTask(id)
+    await axios.deleteTask(id)
     setTasks([...tasks.map(task => task.id === id ? undefined : task)])
   }
 
@@ -32,35 +31,34 @@ function App() {
   }
 
   async function changeTask(changed_task) {
-    await axi.changeTask(changed_task)
+    await axios.changeTask(changed_task)
     setTasks([...tasks.map(task => task.id === changed_task.id ? changed_task : task)])
   }
 
   async function changeDone(task) {
-    await axi.changeDone(task)
+    await axios.changeDone(task)
     setTasks([...tasks.map(t => t.id === task.id ? task : t)])
   }
 
   async function addList(list) {
-    let response = await axi.addList(list)
+    let response = await axios.addList(list)
     setLists([...lists, response])
 
   }
 
   async function deleteList(id) {
-    await axi.deleteList(id)
+    await axios.deleteList(id)
     setLists([...lists.map(list => list.id === id ? undefined : list)])
   }
 
   useEffect(() => {
     fetchLists()
   }, [])
-  
-  async function fetchLists() {
-    let response = await axios.get('http://localhost:8080/api/lists')
-    setLists(response.data)
-  }
 
+  async function fetchLists() {
+    let response = await axios.fetchLists()
+    setLists(response)
+  }
 
   return (
     <div id='todolist_app'>
