@@ -13,8 +13,8 @@ class dashboardController {
 
     async tasklist(req, res) {
         const id = req.params.id
-        const {all} = req.body
-        const tasklist = await model.tasklist(id, all)
+        // const {all} = req.body
+        const tasklist = await model.tasklist(id)
         res.json(tasklist)
     }
 }

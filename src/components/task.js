@@ -26,6 +26,7 @@ const Task = (props) => {
     for (let item of lists) {
         if (item.id === list_id) list_name = item.name
     }
+    let ref = "/todo-list/" + list_id
 
     let today = new Date()
     duedate = new Date(duedate)
@@ -37,12 +38,12 @@ const Task = (props) => {
         hr_color = '#58AC83'
         checked = true
         status = 'done'
-    } else if (today > duedate && done === false && (duedate - new Date(null)) !== 0) {
+    } else if ((today - duedate) > 86399000 && done === false && (duedate - new Date(null)) !== 0) {
         hr_color = '#E63241'
         h4_color = '#E63241' 
     }
-    (duedate - new Date(null)) === 0 ? duedate = '' : duedate = duedate.toLocaleDateString()
-    // (duedate - new Date(null)) === 0 ? duedate = '' : duedate = duedate.toLocaleDateString('en-GB')
+    // (duedate - new Date(null)) === 0 ? duedate = '' : duedate = duedate.toLocaleDateString()
+    (duedate - new Date(null)) === 0 ? duedate = '' : duedate = duedate.toLocaleDateString('en-GB')
     return (
         <div className={'task ' + status} id={id}>
             <hr color={hr_color}/>
@@ -55,7 +56,7 @@ const Task = (props) => {
                 {duedate}</h4>
             <h3><input type="checkbox" defaultChecked={checked} onClick={changeDoneHandler}/>{name}</h3>
             <p>{description}</p>
-            <div className="billet">{list_name}</div>
+            <div className="billet"><a href={ref}>{list_name}</a></div>
         </div>
     )
 }

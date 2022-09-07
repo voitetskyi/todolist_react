@@ -4,9 +4,6 @@ import SideList from "./sideList";
 
 const Sidebar = (props) => {
     let lists = props.lists
-    const selectFilter = props.selectFilter
-    const allTasks = props.allTasks
-    const tasksWithoutList = props.tasksWithoutList
 
     function closeAddTaskForm () {
         const addTaskFormElement = document.getElementById('addTaskForm')
@@ -32,8 +29,8 @@ const Sidebar = (props) => {
         <div id='sidebar'>
             <h2 style={{margin: 20}}>Мої списки завдань</h2>
             <div id="lists">
-                <div className="side_list" id="side_list" onClick={allTasks}>Всі завдання</div>
-                {lists.filter(list => list !== undefined).map(l => <SideList key={l.id} lists={l} selectFilter={selectFilter}/>)}
+                <div className="side_list" id="side_list"><a href="/today">Список завдань на сьогодні</a></div>
+                {lists.filter(list => list !== undefined).map(l => <SideList key={l.id} lists={l}/>)}
             </div>
             <button style={{margin: 20}} onClick={closeAddTaskForm}>Додати завдання</button>
             <button style={{margin: 20}} onClick={closeAddListForm}>Додати список</button>

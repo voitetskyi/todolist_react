@@ -8,9 +8,12 @@ const SideList = (props) => {
         selectFilter(props.lists.id)
     }
     
-    id = 'side_list' + id
+    let side_list_id = 'side_list' + id
+    let ref = "/todo-list/" + id
     return (
-        <div className="side_list" id={id} onClick={selectFilterHandler}>{name}</div>
+        <div className="side_list" id={side_list_id} onClick={selectFilterHandler}>
+            <a href={ref}>{name}</a>
+        </div>
     )
 }
 

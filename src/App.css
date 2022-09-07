@@ -15,7 +15,8 @@
 .side_list:hover {
   background-color: #EEF3FE;
 }
-.side_list {
+.side_list a{
+  display: block;
   margin-bottom: 10px;
 }
 #login {
@@ -35,7 +36,7 @@ h1 {
 }
 .billet {
   width: 150px;
-  background-color: #5C86F2;
+  background-color: skyblue;
   text-align: center;
   border-radius: 4px;
   color: #FFFFFF;
