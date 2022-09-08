@@ -1,6 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
-const UpdateTaskForm = ({lists, task, changeTask}) => {
+
+const UpdateTaskForm = () => {
+    const dispatch = useDispatch()
+    const lists = useSelector(state => state.lists)
+    const tasks = useSelector(state => state.tasks)
+
+    let task
+
 
     let done
     let name
@@ -45,7 +53,7 @@ const UpdateTaskForm = ({lists, task, changeTask}) => {
             id: id
         }
         // // console.log(lists, tasks, onChange)
-        changeTask(task)
+        // changeTask(task)
         // // console.log(tasks)
         closeUpdateTaskForm()
     }

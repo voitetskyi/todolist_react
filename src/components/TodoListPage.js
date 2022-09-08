@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import Task from "./task";
+import axios from '../Axios';
 
-const axios = require('axios');
 
 const TodoListPage = (props) => {
     let lists = props.lists
@@ -12,7 +11,7 @@ const TodoListPage = (props) => {
     let setLists = props.setLists
     let deleteTask = props.deleteTask
     let updateTask = props.updateTask
-    let changeDone = props.updateTask
+    let changeDone = props.changeDone
 
     let {id} = useParams()
 
@@ -24,15 +23,14 @@ const TodoListPage = (props) => {
         fetchListsTodo()
     }, [])
 
-    let endpoint = 'http://localhost:8080/api/list/' + id + '/tasks'
     async function fetchTasksTodo() {
-        let response = await axios.get(endpoint)
-        setTasks(response.data)
+        let response = await axios.fetchTasksTodo(id)
+        setTasks(response)
     }
 
     async function fetchListsTodo() {
-        let response = await axios.get('http://localhost:8080/api/lists')
-        setLists(response.data)
+        let response = await axios.fetchListsTodo()
+        setLists(response)
     }
 
     let list_name = ''

@@ -1,6 +1,8 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
-const AddListForm = ({addList}) => {
+
+const AddListForm = () => {
 
     function closeAddListForm () {
         const addListFormElement = document.getElementById('addListForm')
@@ -17,7 +19,7 @@ const AddListForm = ({addList}) => {
         const list = {
             name: obj.name
         }
-        addList(list)
+        // addList(list)
         closeAddListForm()
     }
 

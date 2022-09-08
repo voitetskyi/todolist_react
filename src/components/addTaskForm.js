@@ -1,6 +1,10 @@
 import React, {Component} from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
-const AddTaskForm = ({lists, addTask}) => {
+const AddTaskForm = () => {
+    const dispatch = useDispatch()
+    const lists = useSelector(state => state.lists)
+
 
     const closeAddTaskForm = () => {
         const addTaskFormElement = document.getElementById('addTaskForm')
@@ -25,7 +29,7 @@ const AddTaskForm = ({lists, addTask}) => {
             duedate: (obj.duedate !== '' ? obj.duedate : undefined),
             list_id: list_id
         }
-        addTask(task)
+        // addTask(task)
         closeAddTaskForm()
     }
     return (
